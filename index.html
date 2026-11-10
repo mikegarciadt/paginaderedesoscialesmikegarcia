@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Professional Video Editing & Graphic Design | Creaked Thinking</title>
+    <meta
+      name="description"
+      content="Professional video editing and graphic design for social media. Transform your footage and ideas into high-quality content ready to publish."
+    >
+    <meta property="og:title" content="Creaked Thinking — Video Editing & Graphic Design">
+    <meta property="og:type" content="website">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+
+    <!-- ===== HEADER Y NAVEGACIÓN ===== -->
+    <header id="top">
+      <a href="#top" class="brand">
+        <img src="assets/logo.png" alt="Creaked Thinking by Mike Garcia" width="auto" height="300px">
+      </a>
+      <nav id="nav">
+        <a href="#work" data-en="Portfolio" data-es="Portafolio"></a>
+        <a href="#why" data-en="Services" data-es="Servicios"></a>
+        <a href="#how" data-en="How It Works" data-es="Proceso"></a>
+        <a href="#pricing" data-en="Pricing" data-es="Precios"></a>
+        <a href="#contact" data-en="Contact" data-es="Contacto"></a>
+      </nav>
+      <div class="hr">
+        <button class="lang" id="lang" aria-label="Language">EN | ES</button>
+        <a class="btn sm" href="#pricing" data-en="Start a project" data-es="Iniciar proyecto"></a>
+        <button id="burger" aria-label="Menu" aria-expanded="false">☰</button>
+      </div>
+    </header>
+    <main>
+
+      <!-- ===== HERO ===== -->
+      <section class="hero">
+        <div class="ghost" aria-hidden="true">CONTENT</div>
+        <div class="htxt">
+          <p
+            class="eyebrow"
+            data-en="Video Editing · Graphic Design"
+            data-es="Edición de video · Diseño gráfico"
+          ></p>
+          <h1 data-en="YOUR CONTENT. <em>REIMAGINED.</em>" data-es="TU CONTENIDO. <em>REIMAGINADO.</em>"></h1>
+          <p
+            class="sub"
+            data-en="Professional video editing and graphic design that turn your raw material into content worth watching."
+            data-es="Edición de video y diseño gráfico profesional que convierten tu material en contenido que vale la pena ver."
+          ></p>
+          <p
+            class="sub2"
+            data-en="From short-form videos to scroll-stopping visuals, we create content that helps your brand show up with confidence."
+            data-es="Desde videos cortos hasta piezas que detienen el scroll, creamos contenido para que tu marca se muestre con confianza."
+          ></p>
+          <div class="cta">
+            <a class="btn" href="#work" data-en="Explore Our Work" data-es="Ver nuestro trabajo"></a>
+            <a class="btn ghostb" href="#pricing" data-en="View Our Plans" data-es="Ver planes"></a>
+          </div>
+        </div>
+        <div class="phone-wrap">
+          <img class="phone-img" src="assets/iphone_demo.png" alt="Smartphone showing social media content created by Creaked Thinking" fetchpriority="high">
+          <span class="tag t1">Video Editing</span>
+          <span class="tag t2">Graphic Design</span>
+          <span class="tag t3">Ready to Publish</span>
+        </div>
+      </section>
+
+      <!-- ===== PORTFOLIO ===== -->
+      <section id="work" class="sec">
+        <h2
+          data-en="GOOD CONTENT <em>SPEAKS</em> FOR ITSELF."
+          data-es="EL BUEN CONTENIDO <em>HABLA</em> POR SÍ SOLO."
+        ></h2>
+        <p
+          class="lead"
+          data-en="Explore the creativity behind every frame, every design and every detail."
+          data-es="Explora la creatividad detrás de cada cuadro, diseño y detalle."
+        ></p>
+        <div class="filters" id="filters"></div>
+        <div class="grid" id="grid"></div>
+      </section>
+
+      <!-- ===== BEFORE & AFTER ===== -->
+      <section class="sec" id="ba">
+        <h2 data-en="FROM RAW TO <em>REMARKABLE.</em>" data-es="DE CRUDO A <em>REMARCABLE.</em>"></h2>
+        <p
+          class="lead"
+          data-en="Your footage has potential. We bring it to life."
+          data-es="Tu material tiene potencial. Lo hacemos brillar."
+        ></p>
+        <div class="cmp" id="cmp">
+          <!-- Para usar fotos/videos reales: dentro de cada capa agrega <img src="assets/raw.jpg" alt="..."> (ambas con las mismas dimensiones) -->
+          <div class="cmp-layer cmp-after"><span class="cmp-demo">DEMO</span></div>
+          <div class="cmp-layer cmp-before"><span class="cmp-demo">DEMO</span></div>
+          <span class="cmp-tag cmp-tag-l">BEFORE · RAW</span>
+          <span class="cmp-tag cmp-tag-r">AFTER · FINAL EDIT</span>
+          <div class="cmp-handle">
+            <span class="cmp-line"></span>
+            <button type="button" class="cmp-knob" id="cmp-knob" role="slider" aria-label="Before and after comparison" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== WHY CHOOSE US ===== -->
+      <section id="why" class="sec">
+        <h2
+          data-en="WHY SETTLE FOR <em>ORDINARY?</em>"
+          data-es="¿POR QUÉ CONFORMARSE CON LO <em>ORDINARIO?</em>"
+        ></h2>
+        <p
+          class="lead"
+          data-en="Great content doesn't have to be complicated."
+          data-es="El gran contenido no tiene por qué ser complicado."
+        ></p>
+        <div class="cards" id="why-c"></div>
+      </section>
+
+      <!-- ===== HOW IT WORKS ===== -->
+      <section id="how" class="sec">
+        <h2
+          data-en="YOUR CONTENT JOURNEY. <em>MADE SIMPLE.</em>"
+          data-es="TU CAMINO CREATIVO. <em>SIMPLE.</em>"
+        ></h2>
+        <p
+          class="lead"
+          data-en="Five simple steps from your idea to your finished content."
+          data-es="Cinco pasos simples de tu idea a tu contenido final."
+        ></p>
+        <ol class="steps" id="steps"></ol>
+      </section>
+
+      <!-- ===== PRICING (planes y extras se generan en script.js) ===== -->
+      <section id="pricing" class="sec">
+        <h2
+          data-en="CREATIVE PLANS. <em>BUILT FOR YOUR BRAND.</em>"
+          data-es="PLANES CREATIVOS. <em>PARA TU MARCA.</em>"
+        ></h2>
+        <p
+          class="lead"
+          data-en="Everything you need to keep your digital presence looking sharp."
+          data-es="Todo lo que necesitas para que tu presencia digital luzca impecable."
+        ></p>
+        <p
+          class="pill"
+          data-en="Graphic Design | Video Editing | Content Ready to Publish"
+          data-es="Diseño gráfico | Edición de video | Contenido listo para publicar"
+        ></p>
+        <div class="plans" id="plans"></div>
+        <p
+          class="note"
+          data-en="Carousels include up to 4 slides. · Vertical videos include up to 40 seconds. · All packages are billed monthly. Prices in USD."
+          data-es="Los carruseles incluyen hasta 4 diapositivas. · Los videos verticales son de hasta 60 segundos. · Todos los paquetes se facturan mensualmente. Precios en USD."
+        ></p>
+        <h3 class="more" data-en="NEED A LITTLE MORE?" data-es="¿NECESITAS UN POCO MÁS?"></h3>
+        <p
+          class="lead"
+          data-en="Add extra creative pieces whenever your project needs them."
+          data-es="Agrega piezas extra cuando tu proyecto lo necesite."
+        ></p>
+        <div class="extras" id="extras"></div>
+        <p
+          class="note"
+          data-en="Additional services are quoted and approved separately before production begins."
+          data-es="Los servicios adicionales se cotizan y aprueban por separado antes de iniciar."
+        ></p>
+      </section>
+
+      <!-- ===== FAQ ===== -->
+      <section id="faq" class="sec narrow">
+        <h2
+          data-en="QUESTIONS? <em>WE'VE GOT ANSWERS.</em>"
+          data-es="¿PREGUNTAS? <em>TENEMOS RESPUESTAS.</em>"
+        ></h2>
+        <div id="faq-l"></div>
+      </section>
+
+      <!-- ===== CONTACTO ===== -->
+      <section id="contact" class="sec contact">
+        <img
+          class="memoji"
+          src="assets/memoji.png"
+          alt="3D avatar of the creator smiling with a fist bump"
+          width="320"
+          height="400"
+          loading="lazy"
+        >
+        <div>
+          <h2
+            data-en="LET'S CREATE SOMETHING <em>AMAZING</em> TOGETHER."
+            data-es="CREEMOS ALGO <em>INCREÍBLE</em> JUNTOS."
+          ></h2>
+          <p
+            class="lead"
+            data-en="More than content. A creative partnership."
+            data-es="Más que contenido. Una alianza creativa."
+          ></p>
+          <p
+            data-en="Great content starts with a conversation. Tell us about your brand, your ideas and what you want to create. Let's bring your vision to life."
+            data-es="El gran contenido empieza con una conversación. Cuéntanos sobre tu marca, tus ideas y lo que quieres crear."
+          ></p>
+          <p
+            class="warm"
+            data-en="You're not just another client. You're part of the creative journey."
+            data-es="No eres un cliente más. Eres parte del viaje creativo."
+          ></p>
+          <div class="cta">
+            <a
+              class="btn"
+              id="wa" href="https://wa.me/57312570514"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-en="LET'S BUILD SOMETHING TOGETHER"
+              data-es="CONSTRUYAMOS ALGO JUNTOS"
+            ></a>
+            <a class="btn ghostb" id="mail" href="mailto:mg34052@gmail.com" data-en="Send an Email" data-es="Enviar correo"></a>
+          </div>
+          <small
+            data-en="No pressure. Just ideas, creativity and a great conversation."
+            data-es="Sin presión. Solo ideas, creatividad y una buena conversación."
+          ></small>
+        </div>
+      </section>
+
+      <!-- ===== TÉRMINOS Y CONDICIONES (resumen) ===== -->
+      <section class="sec narrow terms">
+        <h2 data-en="TRANSPARENT FROM THE <em>START.</em>" data-es="TRANSPARENTES <em>DESDE EL INICIO.</em>"></h2>
+        <p
+          data-en="Clear expectations make great collaborations. Before starting a project, please review our service conditions, revision policies, delivery times and payment terms."
+          data-es="Expectativas claras hacen grandes colaboraciones. Antes de iniciar, revisa nuestras condiciones de servicio, revisiones, tiempos de entrega y pagos."
+        ></p>
+        <a
+          class="btn ghostb"
+          href="terms.html"
+          data-en="VIEW FULL TERMS & CONDITIONS"
+          data-es="VER TÉRMINOS Y CONDICIONES COMPLETOS"
+        ></a>
+      </section>
+    </main>
+
+    <!-- ===== FOOTER ===== -->
+    <footer>
+      <img src="assets/logo.png" alt="Creaked Thinking" width="auto" height="100">
+      <p
+        data-en="Creating content with purpose, personality and visual impact."
+        data-es="Creando contenido con propósito, personalidad e impacto visual."
+      ></p>
+      <nav>
+        <a href="#work">Portfolio</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#contact">Contact</a>
+        <a id="ig" href="#" >Instagram</a>
+        <a id="tt" href="#">TikTok</a>
+        <a href="terms.html">Terms & Conditions</a>
+        <a href="terms.html">Privacy Policy</a>
+      </nav>
+      <small>
+        ©
+        <span id="yr"></span>
+        Creaked Thinking. All rights reserved.
+      </small>
+    </footer>
+
+    <!-- ===== LIGHTBOX ===== -->
+    <dialog id="lb">
+      <button id="lbx" aria-label="Close">✕</button>
+      <div id="lbc"></div>
+    </dialog>
+
+    <!-- ===== SCRIPT ===== -->
+    <script src="script.js"></script>
+  </body>
+</html>
