@@ -299,31 +299,16 @@ const faq = [
 /* ========================================================
    DATOS: PORTFOLIO (piezas de demostración y categorías)
    ======================================================== */
+/* Cada trabajo: k = categoría, t = título, type = "video" | "image", src = archivo,
+   poster = imagen previa del video (opcional), r = proporción del recuadro.
+   Para usar tus piezas: sube los archivos a assets/portfolio/ y cambia solo "src" (y "poster"). */
 const works = [
-  [
-    "Video Editing",
-    "Social Media Video — Demo"
-  ],
-  [
-    "Static Designs",
-    "Static Post — Demo"
-  ],
-  [
-    "Carousels",
-    "Instagram Carousel — Demo"
-  ],
-  [
-    "Stories",
-    "Story Design — Demo"
-  ],
-  [
-    "Web Graphics",
-    "Web Graphic — Demo"
-  ],
-  [
-    "Video Editing",
-    "Vertical Video — Demo"
-  ]
+  { k: "Video Editing",  t: "Social Media Video — Demo", type: "video", src: "assets/portfolio/work1.mp4", poster: "assets/portfolio/work1.jpg", r: "9/16" },
+  { k: "Static Designs", t: "Static Post — Demo",        type: "image", src: "assets/portfolio/work2.jpg", r: "1/1" },
+  { k: "Carousels",      t: "Instagram Carousel — Demo", type: "image", src: "assets/portfolio/work3.jpg", r: "4/5" },
+  { k: "Stories",        t: "Story Design — Demo",       type: "image", src: "assets/portfolio/work4.jpg", r: "9/16" },
+  { k: "Web Graphics",   t: "Web Graphic — Demo",        type: "image", src: "assets/portfolio/work5.jpg", r: "16/10" },
+  { k: "Video Editing",  t: "Vertical Video — Demo",     type: "video", src: "assets/portfolio/work6.mp4", poster: "assets/portfolio/work6.jpg", r: "4/5" }
 ];
 const cats = [
   "All Work",
@@ -370,16 +355,30 @@ function setLang(l) {
 /* ========================================================
    PORTFOLIO: filtros y galería
    ======================================================== */
+const mediaTag = (w, full = false) => w.type == "video"
+  ? (full
+      ? `<video src="${ w.src }" poster="${ w.poster || "" }" controls autoplay loop playsinline></video>`
+      : `<video src="${ w.src }" poster="${ w.poster || "" }" muted loop playsinline preload="metadata"></video>`)
+  : `<img src="${ w.src }" alt="${ w.t }" loading="lazy" ${ full ? "" : "draggable=\"false\"" }>`;
+
 function grid(f = "All Work") {
   $("#filters").innerHTML = cats.map(c => `<button class="${ c == f ? "on" : "" }" data-c="${ c }">${ c }</button>`).join("");
-  $("#grid").innerHTML = works.filter(w => f == "All Work" || w[0] == f).map((w, i) => `<button class="item" data-t="${ w[1] }" data-k="${ w[0] }"><div class="ph" style="aspect-ratio:${ [
-    9 / 16,
-    1,
-    4 / 5,
-    9 / 16,
-    16 / 10,
-    4 / 5
-  ][i % 6] }"><span>${ w[1] }</span></div><small>DEMO</small></button>`).join("");
+  $("#grid").innerHTML = works
+    .map((w, idx) => ({ w, idx }))
+    .filter(({ w }) => f == "All Work" || w.k == f)
+    .map(({ w, idx }) => `<button class="item" data-i="${ idx }"><div class="ph" style="aspect-ratio:${ w.r }">${ mediaTag(w) }<span>${ w.t }</span></div><small>DEMO</small></button>`)
+    .join("");
+  watchVideos();
+}
+
+/* Los videos del portafolio solo se reproducen cuando están visibles (ahorra batería y datos) */
+let vio;
+function watchVideos() {
+  vio = vio || new IntersectionObserver(es => es.forEach(x => {
+    const v = x.target;
+    if (x.isIntersecting) v.play().catch(() => {}); else v.pause();
+  }), { threshold: 0.25 });
+  document.querySelectorAll("#grid video").forEach(v => vio.observe(v));
 }
 
 /* ========================================================
@@ -400,10 +399,12 @@ document.addEventListener("click", e => {
     grid(c.dataset.c);
   const i = e.target.closest(".item");
   if (i) {
-    $("#lbc").innerHTML = `<h3>${ i.dataset.t }</h3><p style="color:#A6A6A6">${ i.dataset.k } · Demo placeholder — replace with your own work.</p>`;
+    const w = works[+i.dataset.i];
+    $("#lbc").innerHTML = `<h3>${ w.t }</h3><p style="color:#A6A6A6">${ w.k } · Demo placeholder — replace with your own work.</p>${ mediaTag(w, true) }`;
     $("#lb").showModal();
   }
 });
+$("#lb").addEventListener("close", () => { $("#lbc").innerHTML = ""; }); // detiene el video al cerrar
 $("#lbx").onclick = () => $("#lb").close();
 $("#lang").onclick = () => setLang(lang == "en" ? "es" : "en");
 /* Comparador Before & After: pointer events (mouse + táctil), arrastre desde cualquier punto, teclado */
@@ -426,6 +427,13 @@ function initCompare() {
     if (k !== undefined) { e.preventDefault(); set(k); }
   });
   set(50);
+
+  /* Los dos videos corren en paralelo y se re-sincronizan si se separan; solo juegan cuando el comparador es visible */
+  const vb = $("#cmp-v-before"), va = $("#cmp-v-after");
+  const play = () => { va.play().catch(() => {}); vb.play().catch(() => {}); };
+  const pause = () => { va.pause(); vb.pause(); };
+  setInterval(() => { if (!va.paused && Math.abs(va.currentTime - vb.currentTime) > 0.12) vb.currentTime = va.currentTime; }, 250);
+  new IntersectionObserver(es => es.forEach(x => x.isIntersecting ? play() : pause()), { threshold: 0.3 }).observe(box);
 }
 initCompare();
 /* Tarjetas extra: luz que sigue al cursor + :active táctil en iOS */

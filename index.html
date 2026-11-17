@@ -91,9 +91,13 @@
           data-es="Tu material tiene potencial. Lo hacemos brillar."
         ></p>
         <div class="cmp" id="cmp">
-          <!-- Para usar fotos/videos reales: dentro de cada capa agrega <img src="assets/raw.jpg" alt="..."> (ambas con las mismas dimensiones) -->
-          <div class="cmp-layer cmp-after"><span class="cmp-demo">DEMO</span></div>
-          <div class="cmp-layer cmp-before"><span class="cmp-demo">DEMO</span></div>
+          <!-- Para cambiar los videos: reemplaza assets/before-after/before.mp4 y after.mp4 (misma duración y proporción, idealmente 16:9) -->
+          <div class="cmp-layer cmp-after">
+            <video id="cmp-v-after" src="assets/before-after/after.mp4" poster="assets/before-after/after.jpg" muted loop playsinline preload="auto" aria-label="After: final edit"></video>
+          </div>
+          <div class="cmp-layer cmp-before">
+            <video id="cmp-v-before" src="assets/before-after/before.mp4" poster="assets/before-after/before.jpg" muted loop playsinline preload="auto" aria-label="Before: raw footage"></video>
+          </div>
           <span class="cmp-tag cmp-tag-l">BEFORE · RAW</span>
           <span class="cmp-tag cmp-tag-r">AFTER · FINAL EDIT</span>
           <div class="cmp-handle">
