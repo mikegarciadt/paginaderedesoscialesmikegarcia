@@ -1,0 +1,478 @@
+/* ========================================================
+   CONFIGURACIÓN — edita aquí WhatsApp, correo y redes
+   ======================================================== */
+const CONFIG = {
+  whatsapp: "+573125570514",
+  email: "mg34052@gmail.com",
+  instagram: "",
+  tiktok: "",
+  defaultLang: "en",
+  // PDFs de Términos y Condiciones según el idioma (EN / ES)
+  terms: {
+    en: "assets/terms/Creaked_Thinking_Terms_and_Conditions_EN.pdf",
+    es: "assets/terms/Creaked_Thinking_Terminos_y_Condiciones_ES.pdf"
+  },
+  waMessage: "Hi, I came across Creaked Thinking and I'm interested in your video editing and graphic design services. I have a project in mind and would love to discuss how we could work together.",
+  emailSubject: "Creative Project Inquiry — Creaked Thinking"       
+};
+
+/* ========================================================
+   ESTADO Y UTILIDADES
+   ======================================================== */
+let lang = CONFIG.defaultLang;
+const $ = s => document.querySelector(s);
+const L = o => o[lang] || o.en;
+const cop = n => "$" + n.toLocaleString("es-CO") + " USD";
+
+/* ========================================================
+   DATOS: PLANES (precios, ítems y días de entrega)
+   ======================================================== */
+const plans = [
+  {
+    n: "Starter",
+    p: "$99",
+    d: {
+      en: "Start building your digital presence.",
+      es: "Empieza a construir tu presencia digital."
+    },
+    f: {
+      en: [
+        "2 static posts",
+        "3 vertical videos (Reels / TikTok)",
+        "3 stories",
+        "1 revision per piece"
+      ],
+      es: [
+        "2 publicaciones estáticas",
+        "3 videos verticales (Reels / TikTok)",
+        "3 historias",
+        "1 revisión por pieza"
+      ]
+    },
+    t: 8
+  },
+  {
+    n: "Momentum",
+    p: "$199",
+    rec: 1,
+    d: {
+      en: "Keep your brand moving with consistent content.",
+      es: "Mantén tu marca en movimiento constante."
+    },
+    f: {
+      en: [
+        "2 static posts",
+        "3 carousels (up to 4 slides)",
+        "6 vertical videos (Reels / TikTok)",
+        "3 stories",
+        "1 revision per piece"
+      ],
+      es: [
+        "2 publicaciones estáticas",
+        "3 carruseles (hasta 4 diapositivas)",
+        "6 videos verticales (Reels / TikTok)",
+        "3 historias",
+        "1 revisión por pieza"
+      ]
+    },
+    t: 15
+  },
+  {
+    n: "Growth",
+    p: "$299",
+    d: {
+      en: "Increase your content frequency and visual consistency.",
+      es: "Aumenta la frecuencia y la coherencia visual de tu contenido."
+    },
+    f: {
+      en: [
+        "5 static posts",
+        "5 carousels (up to 4 slides)",
+        "8 vertical videos (Reels / TikTok)",
+        "5 stories",
+        "2 revisions per piece"
+      ],
+      es: [
+        "5 publicaciones estáticas",
+        "5 carruseles (hasta 4 diapositivas)",
+        "8 videos verticales (Reels / TikTok)",
+        "5 historias",
+        "2 revisiones por pieza"
+      ]
+    },
+    t: 20
+  },
+  {
+    n: "Impact",
+    p: "$499",
+    d: {
+      en: "High-volume content production for ambitious brands.",
+      es: "Producción de contenido de alto nivel."
+    },
+    f: {
+      en: [
+        "5 static posts",
+        "5 carousels (up to 4 slides)",
+        "12 vertical videos (Reels / TikTok)",
+        "15 stories",
+        "Up to 3 revisions per piece"
+      ],
+      es: [
+        "5 publicaciones estáticas",
+        "5 carruseles (hasta 4 diapositivas)",
+        "12 videos verticales (Reels / TikTok)",
+        "15 historias",
+        "Hasta 3 revisiones por pieza"
+      ]
+    },
+    t: 25
+  }
+];
+
+/* ========================================================
+   DATOS: WHY CHOOSE US
+   ======================================================== */
+const why = [
+  [
+    "Professional Quality",
+    "Every piece is crafted with attention to detail, visual consistency and a clear creative direction.",
+    "Calidad profesional",
+    "Cada pieza se crea con atención al detalle, coherencia visual y dirección creativa clara."
+  ],
+  [
+    "Simple Workflow",
+    "You provide the material. We take care of the editing and design. It's that simple.",
+    "Proceso simple",
+    "Tú envías el material. Nosotros editamos y diseñamos. Así de simple."
+  ],
+  [
+    "Content That Fits Your Brand",
+    "Every design and video is developed around your brand's identity, style and communication needs.",
+    "Contenido a la medida de tu marca",
+    "Cada diseño y video se desarrolla según la identidad, el estilo y las necesidades de tu marca."
+  ],
+  [
+    "Ready-to-Publish Content",
+    "Receive professionally prepared digital assets in the formats you need for your platforms.",
+    "Listo para publicar",
+    "Recibe piezas digitales profesionales en los formatos que tus plataformas necesitan."
+  ],
+  [
+    "Flexible Content Solutions",
+    "From individual pieces to monthly content packages, choose the solution that fits your needs.",
+    "Soluciones flexibles",
+    "Desde piezas individuales hasta paquetes mensuales, elige lo que se ajuste a ti."
+  ],
+  [
+    "Direct Creative Collaboration",
+    "Work directly with the person responsible for your content, with clear communication throughout the process.",
+    "Colaboración directa",
+    "Trabaja directamente con quien crea tu contenido, con comunicación clara en todo el proceso."
+  ]
+];
+
+/* ========================================================
+   DATOS: HOW IT WORKS (5 pasos)
+   ======================================================== */
+const steps = [
+  [
+    "Let's Talk",
+    "Tell us about your brand, your goals and the type of content you need.",
+    "Hablemos",
+    "Cuéntanos sobre tu marca, tus metas y el tipo de contenido que necesitas."
+  ],
+  [
+    "Choose Your Plan",
+    "Find the package that matches your content needs and monthly goals.",
+    "Elige tu plan",
+    "Encuentra el paquete que se ajusta a tus necesidades mensuales."
+  ],
+  [
+    "Send Your Materials",
+    "Share your videos, photos, logos, references and creative direction.",
+    "Envía tu material",
+    "Comparte tus videos, fotos, logos, referencias y dirección creativa."
+  ],
+  [
+    "We Create",
+    "We edit, design and refine every piece with attention to detail.",
+    "Creamos",
+    "Editamos, diseñamos y pulimos cada pieza con atención al detalle."
+  ],
+  [
+    "Review & Receive",
+    "Review your content, request your included revisions and receive your final files, ready to publish.",
+    "Revisa y recibe",
+    "Revisa tu contenido, solicita las revisiones incluidas y recibe tus archivos finales."
+  ]
+];
+
+/* ========================================================
+   DATOS: SERVICIOS ADICIONALES
+   ======================================================== */
+const extras = [
+  [
+    "Static post",
+    "Publicación estática",
+    "$20"
+  ],
+  [
+    "Story",
+    "Historia",
+    "$12"
+  ],
+  [
+    "Carousel up to 4 slides",
+    "Carrusel hasta 4 diapositivas",
+    "$55"
+  ],
+  [
+    "Additional carousel slide",
+    "Diapositiva adicional",
+    "$14"
+  ],
+  [
+    "Format adaptation",
+    "Adaptación de formato",
+    "from $8"
+  ],
+  [
+    "Vertical video up to 30s",
+    "Video vertical hasta 30 s",
+    "$45"
+  ],
+  [
+    "Vertical video 31–60s",
+    "Video vertical 31–60 s",
+    "$60"
+  ],
+  [
+    "Advanced video editing",
+    "Edición avanzada de video",
+    "from $65"
+  ]
+];
+
+/* ========================================================
+   DATOS: PREGUNTAS FRECUENTES
+   ======================================================== */
+const faq = [
+  [
+    "Do I need to record my own videos?",
+    "Yes. You provide the original footage, photographs and materials required. We take care of editing and graphic design.",
+    "¿Debo grabar mis propios videos?",
+    "Sí. Tú aportas el material original; nosotros nos encargamos de la edición y el diseño."
+  ],
+  [
+    "Do you manage social media accounts?",
+    "No. Our service focuses on content creation and editing. Publishing, account management and community management are not included.",
+    "¿Administran redes sociales?",
+    "No. Nos enfocamos en crear y editar contenido. No incluye publicación, administración ni community management."
+  ],
+  [
+    "Are the videos ready to publish?",
+    "Yes. Final videos and graphics are delivered in the agreed digital formats.",
+    "¿Los videos quedan listos para publicar?",
+    "Sí. Se entregan en los formatos digitales acordados."
+  ],
+  [
+    "How long does delivery take?",
+    "It depends on the package. Each plan has an estimated production period in business days.",
+    "¿Cuánto tarda la entrega?",
+    "Depende del paquete. Cada plan tiene un tiempo estimado en días hábiles."
+  ],
+  [
+    "Can I request changes?",
+    "Yes. Each package includes a set number of revision rounds per piece. Additional revisions may be quoted separately.",
+    "¿Puedo pedir cambios?",
+    "Sí. Cada paquete incluye rondas de revisión por pieza. Las adicionales se cotizan aparte."
+  ],
+  [
+    "Do you guarantee more followers or views?",
+    "No. No audience growth, engagement, reach or sales results are guaranteed. We focus on professional content and visual quality.",
+    "¿Garantizan más seguidores o vistas?",
+    "No. No garantizamos crecimiento, interacción, alcance ni ventas; nos enfocamos en calidad visual."
+  ],
+  [
+    "Can I work with you from another country?",
+    "Yes. The service works remotely with international clients through digital communication and file delivery.",
+    "¿Puedo trabajar desde otro país?",
+    "Sí. El servicio es remoto, con comunicación y entrega de archivos digitales."
+  ]
+];
+
+/* ========================================================
+   DATOS: PORTFOLIO (piezas de demostración y categorías)
+   ======================================================== */
+/* Cada trabajo: k = categoría, t = título, type = "video" | "image", src = archivo,
+   poster = imagen previa del video (opcional), r = proporción del recuadro.
+   Para usar tus piezas: sube los archivos a assets/portfolio/ y cambia solo "src" (y "poster"). */
+const works = [
+  { k: "Video Editing",  t: "Social Media Video — Demo", type: "video", src: "assets/portfolio/work1.mp4", poster: "assets/portfolio/work1.jpg", r: "9/16" },
+  { k: "Static Designs", t: "Static Post — Demo",        type: "image", src: "assets/portfolio/work2.jpg", r: "1/1" },
+  { k: "Carousels",      t: "Instagram Carousel — Demo", type: "image", src: "assets/portfolio/work3.jpg", r: "4/5" },
+  { k: "Stories",        t: "Story Design — Demo",       type: "image", src: "assets/portfolio/work4.jpg", r: "9/16" },
+  { k: "Web Graphics",   t: "Web Graphic — Demo",        type: "image", src: "assets/portfolio/work5.jpg", r: "16/10" },
+  { k: "Video Editing",  t: "Vertical Video — Demo",     type: "video", src: "assets/portfolio/work6.mp4", poster: "assets/portfolio/work6.jpg", r: "4/5" }
+];
+const cats = [
+  "All Work",
+  "Video Editing",
+  "Static Designs",
+  "Carousels",
+  "Stories",
+  "Web Graphics"
+];
+
+/* ========================================================
+   WHATSAPP
+   ======================================================== */
+const wa = msg => CONFIG.whatsapp ? `https://wa.me/${ CONFIG.whatsapp }?text=${ encodeURIComponent(msg) }` : "#contact";
+
+/* ========================================================
+   RENDER: pinta planes, tarjetas, pasos, extras y FAQ
+   ======================================================== */
+function render() {
+  $("#plans").innerHTML = plans.map(p => `<article class="plan ${ p.rec ? "rec" : "" }">${ p.rec ? "<span class=\"badge\">★ RECOMMENDED</span>" : "" }<h3>${ p.n }</h3><p class="d">${ L(p.d) }</p><div class="pr">${ p.p }<small>USD / ${ lang == "es" ? "mes" : "month" }</small></div><ul>${ p.f[lang].map(x => `<li>${ x }</li>`).join("") }</ul><div class="del">${ lang == "es" ? "Entrega" : "Estimated delivery" }: ${ p.t } ${ lang == "es" ? "días hábiles" : "business days" }</div><a class="btn" href="${ wa(`Hi! I'm interested in the ${ p.n } plan. I'd like to know more.`) }" target="_blank" rel="noopener noreferrer">${ lang == "es" ? "Elegir" : "Choose" } ${ p.n }</a></article>`).join("");
+  const pick = (a, i) => lang == "es" ? a[i + 2] : a[i];
+  $("#why-c").innerHTML = why.map((w, i) => `<div class="card rv"><b>0${ i + 1 }</b><h3>${ pick(w, 0) }</h3><p>${ pick(w, 1) }</p></div>`).join("");
+  $("#steps").innerHTML = steps.map((s, i) => `<li class="rv"><b>0${ i + 1 }</b><h3>${ pick(s, 0) }</h3><p>${ pick(s, 1) }</p></li>`).join("");
+  $("#extras").innerHTML = extras.map((e, i) => {
+    const es = lang == "es", from = /^from/.test(e[2]), amount = e[2].replace(/^from\s*/, "");
+    const cat = i < 5 ? (es ? "Diseño gráfico" : "Graphic design") : (es ? "Edición de video" : "Video editing");
+    const d = (i % 4) * 80; // escalonado solo en la entrada (no retrasa el hover)
+    return `<article class="xc rv" style="transition-delay:${ d }ms,${ d }ms,0s,0s,0s"><small>${ cat }</small><h4>${ es ? e[1] : e[0] }</h4><p class="xp">${ from ? `<span>${ es ? "desde" : "from" }</span>` : "" }<b>${ amount }</b><span>USD</span></p></article>`;
+  }).join("");
+  $("#faq-l").innerHTML = faq.map(f => `<details><summary>${ pick(f, 0) }</summary><p>${ pick(f, 1) }</p></details>`).join("");
+  observe();
+}
+
+/* ========================================================
+   IDIOMA EN / ES
+   ======================================================== */
+function setLang(l) {
+  lang = l;
+  document.documentElement.lang = l;
+  document.querySelectorAll("[data-en]").forEach(e => e.innerHTML = e.dataset[l] || e.dataset.en);
+  document.querySelectorAll("[data-terms]").forEach(a => a.href = CONFIG.terms[l]); // PDF según idioma
+  render();
+}
+
+/* ========================================================
+   PORTFOLIO: filtros y galería
+   ======================================================== */
+const mediaTag = (w, full = false) => w.type == "video"
+  ? (full
+      ? `<video src="${ w.src }" poster="${ w.poster || "" }" controls autoplay loop playsinline></video>`
+      : `<video src="${ w.src }" poster="${ w.poster || "" }" muted loop playsinline preload="metadata"></video>`)
+  : `<img src="${ w.src }" alt="${ w.t }" loading="lazy" ${ full ? "" : "draggable=\"false\"" }>`;
+
+function grid(f = "All Work") {
+  $("#filters").innerHTML = cats.map(c => `<button class="${ c == f ? "on" : "" }" data-c="${ c }">${ c }</button>`).join("");
+  $("#grid").innerHTML = works
+    .map((w, idx) => ({ w, idx }))
+    .filter(({ w }) => f == "All Work" || w.k == f)
+    .map(({ w, idx }) => `<button class="item" data-i="${ idx }"><div class="ph" style="aspect-ratio:${ w.r }">${ mediaTag(w) }<span>${ w.t }</span></div><small>DEMO</small></button>`)
+    .join("");
+  watchVideos();
+}
+
+/* Los videos del portafolio solo se reproducen cuando están visibles (ahorra batería y datos) */
+let vio;
+function watchVideos() {
+  vio = vio || new IntersectionObserver(es => es.forEach(x => {
+    const v = x.target;
+    if (x.isIntersecting) v.play().catch(() => {}); else v.pause();
+  }), { threshold: 0.25 });
+  document.querySelectorAll("#grid video").forEach(v => vio.observe(v));
+}
+
+/* ========================================================
+   ANIMACIÓN AL HACER SCROLL
+   ======================================================== */
+let io;
+function observe() {
+  io = io || new IntersectionObserver(e => e.forEach(x => x.isIntersecting && x.target.classList.add("in")), { threshold: 0.15 });
+  document.querySelectorAll(".rv:not(.in)").forEach(e => io.observe(e));
+}
+
+/* ========================================================
+   EVENTOS (clicks, slider, menú, scroll)
+   ======================================================== */
+document.addEventListener("click", e => {
+  const c = e.target.closest("[data-c]");
+  if (c)
+    grid(c.dataset.c);
+  const i = e.target.closest(".item");
+  if (i) {
+    const w = works[+i.dataset.i];
+    $("#lbc").innerHTML = `<h3>${ w.t }</h3><p style="color:#A6A6A6">${ w.k } · Demo placeholder — replace with your own work.</p>${ mediaTag(w, true) }`;
+    $("#lb").showModal();
+  }
+});
+$("#lb").addEventListener("close", () => { $("#lbc").innerHTML = ""; }); // detiene el video al cerrar
+$("#lbx").onclick = () => $("#lb").close();
+$("#lang").onclick = () => setLang(lang == "en" ? "es" : "en");
+/* Comparador Before & After: pointer events (mouse + táctil), arrastre desde cualquier punto, teclado */
+function initCompare() {
+  const box = $("#cmp"), knob = $("#cmp-knob");
+  let drag = false;
+  const set = v => {
+    v = Math.max(0, Math.min(100, v));
+    box.style.setProperty("--p", v + "%");
+    knob.setAttribute("aria-valuenow", Math.round(v));
+  };
+  const move = e => { const r = box.getBoundingClientRect(); set((e.clientX - r.left) / r.width * 100); };
+  const end = () => { drag = false; box.classList.remove("drag"); };
+  box.addEventListener("pointerdown", e => { drag = true; box.setPointerCapture(e.pointerId); box.classList.add("drag"); move(e); });
+  box.addEventListener("pointermove", e => { if (drag) move(e); });
+  box.addEventListener("pointerup", end);
+  box.addEventListener("pointercancel", end);
+  knob.addEventListener("keydown", e => {
+    const cur = +knob.getAttribute("aria-valuenow"), k = { ArrowLeft: cur - 5, ArrowRight: cur + 5, Home: 0, End: 100 }[e.key];
+    if (k !== undefined) { e.preventDefault(); set(k); }
+  });
+  set(50);
+
+  /* Los dos videos corren en paralelo y se re-sincronizan si se separan; solo juegan cuando el comparador es visible */
+  const vb = $("#cmp-v-before"), va = $("#cmp-v-after");
+  const play = () => { va.play().catch(() => {}); vb.play().catch(() => {}); };
+  const pause = () => { va.pause(); vb.pause(); };
+  setInterval(() => { if (!va.paused && Math.abs(va.currentTime - vb.currentTime) > 0.12) vb.currentTime = va.currentTime; }, 250);
+  new IntersectionObserver(es => es.forEach(x => x.isIntersecting ? play() : pause()), { threshold: 0.3 }).observe(box);
+}
+initCompare();
+/* Tarjetas extra: luz que sigue al cursor + :active táctil en iOS */
+$("#extras").addEventListener("pointermove", e => {
+  const c = e.target.closest(".xc"); if (!c) return;
+  const r = c.getBoundingClientRect();
+  c.style.setProperty("--mx", (e.clientX - r.left) + "px"); c.style.setProperty("--my", (e.clientY - r.top) + "px");
+});
+document.addEventListener("touchstart", () => {}, { passive: true });
+$("#burger").onclick = e => {
+  const o = $("#nav").classList.toggle("open");
+  e.target.setAttribute("aria-expanded", o);
+};
+// Logo: vuelve al inicio (Home) sin recargar; si el usuario ya está arriba, no hace nada
+document.querySelector(".brand").addEventListener("click", e => {
+  e.preventDefault();
+  $("#nav").classList.remove("open");
+  scrollTo({ top: 0, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  history.replaceState(null, "", location.pathname + location.search);
+});
+$("#nav").onclick = () => $("#nav").classList.remove("open");
+addEventListener("scroll", () => $("header").classList.toggle("s", scrollY > 40), { passive: true });
+
+/* ========================================================
+   INICIALIZACIÓN (arranque de la página)
+   ======================================================== */
+$("#yr").textContent = new Date().getFullYear();
+$("#wa").href = wa(CONFIG.waMessage);
+$("#mail").href = CONFIG.email ? `mailto:${ CONFIG.email }?subject=${ encodeURIComponent(CONFIG.emailSubject) }` : "#contact";
+// Redes: si no hay URL configurada, el enlace se oculta (no queda ningún botón sin destino)
+[["#ig", CONFIG.instagram], ["#tt", CONFIG.tiktok]].forEach(([s, u]) => {
+  const a = $(s);
+  if (u) { a.href = u; a.target = "_blank"; a.rel = "noopener noreferrer"; } else a.hidden = true;
+});
+grid();
+setLang(lang);
